@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steam Lobby Redirect</title>
+    <style>
+        body {
+            background-color: #202020;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let hash = window.location.hash.substring(1); // Remove the '#'
+            let parts = hash.split('/');
+
+            if (parts.length === 3) {
+                let gameid = encodeURIComponent(parts[0]);
+                let lobbysteamid = encodeURIComponent(parts[1]);
+                let steamid = encodeURIComponent(parts[2]);
+
+                let steamUrl = `steam://joinlobby/${gameid}/${lobbysteamid}/${steamid}`;
+                window.location.href = steamUrl;
+            } else {
+                document.body.innerHTML = "<h2>Invalid URL format</h2>";
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <h1>Redirecting to Steam Lobby...</h1>
+</body>
+
+</html>
